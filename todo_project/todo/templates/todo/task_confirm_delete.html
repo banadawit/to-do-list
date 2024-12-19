@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Task</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96 text-center">
+      <h1 class="text-3xl font-semibold text-gray-800 mb-4">
+        Are you sure you want to delete this task?
+      </h1>
+      <p class="text-lg text-gray-600 mb-6">{{ object.title }}</p>
+
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div>
+          <button
+            type="submit"
+            class="w-full py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all"
+          >
+            Yes, delete
+          </button>
+        </div>
+      </form>
+
+      <div>
+        <a
+          href="{% url 'task_list' %}"
+          class="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+          >Cancel</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Task</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-lg w-96">
+      <h1 class="text-3xl font-semibold text-gray-800 mb-6 text-center">
+        Update Task
+      </h1>
+
+      <form method="post" class="space-y-6">
+        {% csrf_token %}
+        <div class="space-y-4">
+          <!-- Task Title Field with Pre-filled Data -->
+          <div class="relative">
+            <label for="id_title" class="block text-gray-700 font-medium mb-2"
+              >Task Title</label
+            >
+            <input
+              type="text"
+              name="title"
+              id="id_title"
+              value="{{ task.title }}"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter task title"
+            />
+          </div>
+
+          <!-- Description Field with Pre-filled Data -->
+          <div class="relative">
+            <label
+              for="id_description"
+              class="block text-gray-700 font-medium mb-2"
+              >Description</label
+            >
+            <textarea
+              name="description"
+              id="id_description"
+              rows="4"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter task description"
+            >
+{{ task.description }}</textarea
+            >
+          </div>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            class="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all text-lg font-semibold"
+          >
+            Save Changes
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-4 text-center">
+        <a
+          href="{% url 'task_list' %}"
+          class="text-blue-600 hover:text-blue-800 font-medium transition-colors text-lg"
+          >Back to Task List</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
