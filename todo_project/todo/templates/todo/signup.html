@@ -1,0 +1,18 @@
+{% extends 'todo/base.html' %}{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+  <h1 class="text-2xl font-bold mb-4">Create an Account</h1>
+  <form method="post" class="space-y-4">
+    {% csrf_token %} {{ form.as_p }}
+    <button
+      type="submit"
+      class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+    >
+      Sign Up
+    </button>
+  </form>
+  <p class="mt-4 text-center">
+    Already have an account?
+    <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login</a>
+  </p>
+</div>
+{% endblock content %}

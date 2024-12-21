@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}To-Do App{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white">
+      <nav
+        class="container mx-auto flex justify-between items-center py-4 px-6"
+      >
+        <a href="{% url 'task_list' %}" class="text-2xl font-semibold"
+          >To-Do App</a
+        >
+        <div class="space-x-4">
+          {% if user.is_authenticated %}
+          <form method="POST" action="{% url 'logout' %}" class="inline">
+            {% csrf_token %}
+            <button
+              type="submit"
+              class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+            >
+              Logout
+            </button>
+          </form>
+          {% else %}
+          <a
+            href="{% url 'login' %}"
+            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+          >
+            Login
+          </a>
+          <a
+            href="{% url 'signup' %}"
+            class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+          >
+            Sign Up
+          </a>
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-6">
+      {% block content %} {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-200 py-4">
+      <div class="container mx-auto text-center">
+        &copy; 2024 To-Do App. All rights reserved.
+      </div>
+    </footer>
+  </body>
+</html>

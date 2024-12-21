@@ -1,0 +1,21 @@
+{% extends 'todo/base.html' %} {% block content %}
+<div class="flex justify-center items-center min-h-screen">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-sm">
+    <h1 class="text-2xl font-bold mb-6 text-center">Login</h1>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button
+        type="submit"
+        class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded"
+      >
+        Login
+      </button>
+    </form>
+    <div class="mt-4 text-center">
+      <a href="{% url 'signup' %}" class="text-blue-500 hover:underline">
+        Don't have an account? Sign up
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

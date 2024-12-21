@@ -1,61 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="max-w-4xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-lg">
-      <h1 class="text-4xl font-semibold text-center text-gray-800 mb-8">
-        To-Do List
-      </h1>
+{% extends 'todo/base.html' %} {% block content %}
+<div class="max-w-4xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-lg">
+  <h1 class="text-4xl font-semibold text-center text-gray-800 mb-8">
+    To-Do List
+  </h1>
 
-      <ul class="space-y-6">
-        {% for task in tasks %}
-        <li
-          class="flex items-center justify-between p-5 bg-gray-50 rounded-lg shadow-md hover:bg-gray-100 transition-all"
+  <ul class="space-y-6">
+    {% for task in tasks %}
+    <li
+      class="flex items-center justify-between p-5 bg-gray-50 rounded-lg shadow-md hover:bg-gray-100 transition-all"
+    >
+      <div class="flex items-center justify-between">
+        <!-- Status (Done or Pending) -->
+        <span
+          class="text-xl font-medium mr-3 {% if task.completed %}text-green-600{% else %}text-red-600{% endif %}"
         >
-          <div class="flex items-center justify-between">
-            <!-- Status (Done or Pending) -->
-            <span
-              class="text-xl font-medium mr-3 {% if task.completed %}text-green-600{% else %}text-red-600{% endif %}"
-            >
-              {% if task.completed %}Done{% else %}Pending{% endif %}
-            </span>
-            <!-- Task Title -->
-            <span class="text-lg font-medium text-gray-800"
-              >{{ task.title }}</span
-            >
-          </div>
-          <div class="space-x-6">
-            <!-- Edit Button -->
-            <a
-              href="{% url 'task_update' task.pk %}"
-              class="text-blue-600 hover:text-blue-800 font-medium transition-colors"
-              >Edit</a
-            >
-            <!-- Delete Button -->
-            <a
-              href="{% url 'task_delete' task.pk %}"
-              class="text-red-600 hover:text-red-800 font-medium transition-colors"
-              >Delete</a
-            >
-          </div>
-        </li>
-        {% endfor %}
-      </ul>
-
-      <!-- Add New Task Button -->
-      <div class="mt-8 text-center">
+          {% if task.completed %}Done{% else %}Pending{% endif %}
+        </span>
+        <!-- Task Title -->
+        <span class="text-lg font-medium text-gray-800">{{ task.title }}</span>
+      </div>
+      <div class="space-x-6">
+        <!-- Edit Button -->
         <a
-          href="{% url 'task_create' %}"
-          class="px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all"
-          >Add New Task</a
+          href="{% url 'task_update' task.pk %}"
+          class="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+          >Edit</a
+        >
+        <!-- Delete Button -->
+        <a
+          href="{% url 'task_delete' task.pk %}"
+          class="text-red-600 hover:text-red-800 font-medium transition-colors"
+          >Delete</a
         >
       </div>
-    </div>
-  </body>
-</html>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <!-- Add New Task Button -->
+  <div class="mt-8 text-center">
+    <a
+      href="{% url 'task_create' %}"
+      class="px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all"
+      >Add New Task</a
+    >
+  </div>
+</div>
+{% endblock content%}
