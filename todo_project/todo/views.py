@@ -31,12 +31,14 @@ class TaskDeleteView(DeleteView):
     template_name = 'todo/task_confirm_delete.html'
     success_url = reverse_lazy('task_list')
 
+
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            form.save()  # Save the user to the database
+            return redirect('login')  # Redirect to the login page or another view
     else:
         form = UserCreationForm()
+
     return render(request, 'todo/signup.html', {'form': form})
