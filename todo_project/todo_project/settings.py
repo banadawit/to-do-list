@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # local
     'todo',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

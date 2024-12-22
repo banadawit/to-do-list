@@ -1,18 +1,62 @@
-{% extends 'todo/base.html' %}{% block content %}
-<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
-  <h1 class="text-2xl font-bold mb-4">Create an Account</h1>
-  <form method="post" class="space-y-4">
-    {% csrf_token %} {{ form.as_p }}
+{% extends 'todo/base.html' %} {% block content %}
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Create an Account</h1>
+  <form method="post" class="space-y-5">
+    {% csrf_token %}
+
+    <div>
+      <label for="id_username" class="block text-gray-700 font-medium"
+        >Username</label
+      >
+      <input
+        type="text"
+        id="id_username"
+        name="username"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter your username"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="id_password1" class="block text-gray-700 font-medium"
+        >Password</label
+      >
+      <input
+        type="password"
+        id="id_password1"
+        name="password1"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter your password"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="id_password2" class="block text-gray-700 font-medium"
+        >Confirm Password</label
+      >
+      <input
+        type="password"
+        id="id_password2"
+        name="password2"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Confirm your password"
+        required
+      />
+    </div>
+
     <button
       type="submit"
-      class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+      class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
     >
       Sign Up
     </button>
   </form>
-  <p class="mt-4 text-center">
+
+  <p class="mt-6 text-center text-gray-600">
     Already have an account?
-    <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login</a>
+    <a href="{% url 'login' %}" class="text-blue-600 hover:underline">Login</a>
   </p>
 </div>
 {% endblock content %}
