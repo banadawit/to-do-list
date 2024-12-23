@@ -1,24 +1,61 @@
-{% extends 'todo/base.html' %} {% block content %}
+{% extends 'todo/base.html' %} 
+{% block content %}
 <div class="max-w-4xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-lg">
   <h1 class="text-4xl font-semibold text-center text-gray-800 mb-8">
     To-Do List
   </h1>
 
+  <!-- Filter by Category -->
+  <form method="get" class="mb-6 flex justify-center">
+    <select 
+      name="category" 
+      class="border border-gray-300 rounded-lg px-4 py-2 w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      <option value="">All Categories</option>
+      {% for category in categories %}
+      <option 
+        value="{{ category.name }}" 
+        {% if request.GET.category == category.name %}selected{% endif %}
+      >
+        {{ category.name }}
+      </option>
+      {% endfor %}
+    </select>
+    <button 
+      type="submit" 
+      class="ml-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
+    >
+      Filter
+    </button>
+  </form>
+
+  <!-- Tasks List -->
   <ul class="space-y-6">
     {% for task in tasks %}
     <li
       class="flex items-center justify-between p-5 bg-gray-50 rounded-lg shadow-md hover:bg-gray-100 transition-all"
     >
-      <div class="flex items-center justify-between">
-        <!-- Status (Done or Pending) -->
-        <span
-          class="text-xl font-medium mr-3 {% if task.completed %}text-green-600{% else %}text-red-600{% endif %}"
+      <div class="flex flex-col">
+        <!-- Task Title -->
+        <span class="text-lg font-medium text-gray-800">{{ task.title }}</span>
+        
+        <!-- Task Category -->
+        <span class="text-sm text-gray-500">
+          {% if task.category %}
+            Category: {{ task.category.name }}
+          {% else %}
+            No Category
+          {% endif %}
+        </span>
+
+        <!-- Task Status -->
+        <span 
+          class="mt-2 text-sm font-medium {% if task.completed %}text-green-600{% else %}text-red-600{% endif %}"
         >
           {% if task.completed %}Done{% else %}Pending{% endif %}
         </span>
-        <!-- Task Title -->
-        <span class="text-lg font-medium text-gray-800">{{ task.title }}</span>
       </div>
+      
       <div class="space-x-6">
         <!-- Edit Button -->
         <a
@@ -34,6 +71,8 @@
         >
       </div>
     </li>
+    {% empty %}
+    <p class="text-center text-gray-600">No tasks available.</p>
     {% endfor %}
   </ul>
 
@@ -46,4 +85,4 @@
     >
   </div>
 </div>
-{% endblock content%}
+{% endblock content %}
